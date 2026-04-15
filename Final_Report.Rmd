@@ -9,19 +9,4 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Day 1
 
-## Task 2: Environmental Setup & Data Import 
-```{r}
-# Upload the NHIS 2021 dataset and codebook to the data/ folder
-
-nhis <- read.csv("data/NHIS _Data_2021.csv")
-```
-
-```{r}
-# Perform an initial exploration of the data using the str(), summary(), and head() functions to understand the structure of the dataset.
-str(nhis)
-summary(nhis)
-head(nhis)
-```
-### Interpretation
