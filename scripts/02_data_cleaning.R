@@ -45,3 +45,5 @@ nhis_clean <- nhis_clean %>%
   # Change category names into a factor with specific labels and a specific order
   mutate(Education = factor(Education, levels = c("less than High School", "High School Graduate", "Some College Education", "College Graduate or better")))
     
+# Save the final cleaned dataset as a csv in the data folder
+write_csv(nhis_clean, "data/nhis_clean.csv")
