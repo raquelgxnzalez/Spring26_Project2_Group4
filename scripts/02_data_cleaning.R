@@ -32,3 +32,16 @@ nhis_clean <- nhis_subset %>%
   drop_na()
 
 # Task 2: Recoding Variables
+
+# Update nhis_clean by recoding EDUC_A variable based on codebook categories
+nhis_clean <- nhis_clean %>%
+  # Use case_when() instead of factor() to first group numbers into 4 categories first
+  # Save to new variable Education to save original EDUCP_A data
+  mutate(Education = case_when(
+    EDUCP_A >= 0 & EDUCP_A <= 3 ~ "less than High School",
+    EDUCP_A == 4 ~ "High School Graduate",
+    EDUCP_A >= 5 & EDUCP_A <= 7 ~ "Some College Education",
+    EDUCP_A >= 8 & EDUCP_A <= 10 ~ "College Graduate or better")) %>%
+  # Change category names into a factor with specific labels and a specific order
+  mutate(Education = factor(Education, levels = c("less than High School", "High School Graduate", "Some College Education", "College Graduate or better")))
+    
