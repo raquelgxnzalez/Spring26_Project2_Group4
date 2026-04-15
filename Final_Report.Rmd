@@ -1,0 +1,11 @@
+---
+title: "Final_Report"
+author: "Arely Salinas Cambron, Ruby Cruz, Kylize Dela Cruz, and Raquel Gonzalez"
+date: "2026-04-20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
