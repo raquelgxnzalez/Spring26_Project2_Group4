@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 # Upload the NHIS 2021 dataset and codebook to the data/ folder
 
-nhis <- read.csv("C:/Users/raque/Downloads/PUBH 422/Spring26_Project2_Group4/data/NHIS _Data_2021.csv")
+nhis <- read.csv("data/NHIS _Data_2021.csv")
 ```
 
 ```{r}
