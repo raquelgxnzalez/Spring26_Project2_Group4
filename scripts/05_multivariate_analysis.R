@@ -7,3 +7,14 @@ ggplot(nhis_clean, aes(x = HEIGHTTC_A, y = WEIGHTLBTC_A, color = factor(SEX_A)))
        y = "Weight (pounds)",
        color = "Sex (1=M, 2=F") +
   theme_minimal()
+
+# Use pairs.panels() to create a correlation matrix
+# Select only the quantitative variables for the matrix
+quant_vars <- nhis_clean %>%
+  select(AGEP_A, WEIGHTLBTC_A, HEIGHTTC_A)
+
+pairs.panels(quant_vars,
+             method = "pearson",
+             hist.col = "skyblue",
+             density = TRUE,
+             ellipses = TRUE)
