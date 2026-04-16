@@ -1,5 +1,6 @@
 # Load libraries
 library(tidyverse)
+library(psych)
 
 # Import dataset using relative path for reproducibility
 nhis_data <- read.csv("data/NHIS _Data_2021.csv")
