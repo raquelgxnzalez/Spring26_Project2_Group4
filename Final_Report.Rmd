@@ -9,6 +9,8 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Day 1: Environmental Setup & Data Import
+## Task 2: Environment Setup & Data Setup
 
 ```{r}
 # Load libraries
@@ -27,13 +29,12 @@ str(nhis_data)
 summary(nhis_data)
 head(nhis_data)
 ```
+### Interpretation
 
-```{r}
-# Load original dataset
-nhis_data <- read.csv("data/NHIS _Data_2021.csv")
-```
+The initial exploration of the NHS 2021 dataset reveals a robust sample of 29,482 participants. However, the summary() output highlights the critical necessity of the data cleaning steps performed in the next task. Specifically, variables such as weight and height show extreme maximum values like 999 and 99, which correspond to non-response codes rather than biological measurements. Further, the categorical variables contain placeholder integers for missing data that would invalidate frequency tables if left unaddressed. This exploration justifies the transition to a cleaned dataset to ensure the integrity of our public health analysis. 
 
-# Task 1: Variable Selection & Missing Value Check
+# Day 2: Data Cleaning & Management
+## Task 1: Variable Selection & Missing Value Check
 
 ```{r}
 # Select only the required variables
