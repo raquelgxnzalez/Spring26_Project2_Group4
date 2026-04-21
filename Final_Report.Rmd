@@ -215,6 +215,16 @@ ggplot(nhis_clean, aes(y = HEIGHTTC_A)) +
 # Avergae participants height is 66 inches 
 ```
 
+### Interpretation
+
+The summary statistics and visualizations for the quantitative variables reveal a diverse adult population with expected physiological ranges.
+
+Age(AGEP_A): The average age of the sample is approximately 52.6 years, with a median of 54, suggesting a relatively balanced distribution of middle-aged adults. The histograms show a slight right skew, indicating a wide representation across the lifespan from 18 to 85 years. The boxplots confirm that 50% of the participants fall between the ages of 37 and 67, the IQR.
+
+Weight(WEIGHTLBTC_A): Participants' weights range from 100 to 299 pounds, with a mean weight of 176.8 pounds. Both the histograms and boxplots illustrate that the majority of the population is concentrated between 140 and 200 pounds. The boxplot highlights that while the distribution is centered around the median of 173 lbs, there is a notable spread toward the upper weight limit.
+
+Height(HEIGHTTC_A): The height distribution is approximately normal, centered around a mean of 66.7 inches, or roughly 5'7". The narrow standard deviation at 3.9 inches and the boxplot indicate that most participants are between 64 and 70 inches tall.
+
 ### Qualitative Variables
 
 ```{r}
@@ -307,15 +317,7 @@ ggplot(nhis_clean, aes(x = factor(LSATIS4R_A))) +
        y = "Frequency")
 ```
 
-### Interpretation
-
-The summary statistics and visualizations for the quantitative variables reveal a diverse adult population with expected physiological ranges.
-
-Age(AGEP_A): The average age of the sample is approximately 52.6 years, with a median of 54, suggesting a relatively balanced distribution of middle-aged adults. The histograms show a slight right skew, indicating a wide representation across the lifespan from 18 to 85 years. The boxplots confirm that 50% of the participants fall between the ages of 37 and 67, the IQR.
-
-Weight(WEIGHTLBTC_A): Participants' weights range from 100 to 299 pounds, with a mean weight of 176.8 pounds. Both the histograms and boxplots illustrate that the majority of the population is concentrated between 140 and 200 pounds. The boxplot highlights that while the distribution is centered around the median of 173 lbs, there is a notable spread toward the upper weight limit.
-
-Height(HEIGHTTC_A): The height distribution is approximately normal, centered around a mean of 66.7 inches, or roughly 5'7". The narrow standard deviation at 3.9 inches and the boxplot indicate that most participants are between 64 and 70 inches tall. 
+### Interpretation 
 
 Frequency tables and bar plots were used to assess the distribution of categorical variables. These distributions provide context for the social and health-related tiers of the sample
 
