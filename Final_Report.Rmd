@@ -462,7 +462,7 @@ pairs.panels(quant_vars,
 
 ### Interpretation
 
-The enhanced scatter plot uses color and faceting to visualize complex interactions between physiological and sociodemographic variables. The color coding reveals a distinct biological clustering. Males (1) generally occupy the higher end of both the height and weight axes, while Females (2) are concentrated at lower heights and weights. Despite the clustering, the positive correlation between height and weight remains consistent across both sexes. Faceting the plot by the four recoded education teiers demonstrates that the fundamental relationship between height and weight is stable regardless of socioeconomic status. The scatter plot suggests that while socioeconomic factors like education might influence health outcomes, the biological correlation between height and weight is a universal trend across this NHIS cohort. The density of the "College Graduate or better" facet also reflects the relatively high educational attainment of this specific sample. 
+The enhanced scatter plot uses color and faceting to visualize complex interactions between physiological and sociodemographic variables. The color coding reveals a distinct biological clustering. Males (1) generally occupy the higher end of both the height and weight axes, while Females (2) are concentrated at lower heights and weights. Despite the clustering, the positive correlation between height and weight remains consistent across both sexes. Faceting the plot by the four recoded education tiers demonstrates that the fundamental relationship between height and weight is stable regardless of socioeconomic status. The scatter plot suggests that while socioeconomic factors like education might influence health outcomes, the biological correlation between height and weight is a universal trend across this NHIS cohort. The density of the "College Graduate or better" facet also reflects the relatively high educational attainment of this specific sample. 
 
 The final step in this analysis is to use a correlation scatter plot matrix to examine all the relationships between Age, Weight, and Height.
 
@@ -472,4 +472,4 @@ Age and Weight (r = -0.02): The correlation coefficient is nearly zero, and the 
 
 Age and Height (r = -0.09) There is a very weak negative correlation. This may reflect a slight trend where older participants are marginally shorter on average, potentially due to natural age-related changes or generational differences in average height.
 
-The diagonal histograms show that while Age is fairly even spread across the adult lifespan. weight is slightly right-skewed, and height follows a nearly normal, "bell-shaped" distribution.
+The diagonal histograms show that while Age is fairly even spread across the adult lifespan, weight is slightly right-skewed, and height follows a nearly normal, "bell-shaped" distribution.
