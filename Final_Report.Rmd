@@ -98,6 +98,14 @@ To make the data more actionable for public health interpretation, the education
 
 This recoded variable was converted into a factor with meaningful level names. This transition from raw numeric codes to descriptive labels ensures that the resulting visualizations and summary tables are easily interpretable for public health stakeholders. By explicitly ordered the factor levels, the analysis preserves the natural hierarchy of education, ensuring that any identified trends, such as the correlation between higher education and improved life satisfaction, are presented in a logical and professional manner. This refined dataset, saved as nhis_clean.csv, serves as the finalized foundation for all univariate and bivariate reporting.
 
+# Day 3: Univariate & Bivariate Analysis & Visualization
+
+## Task 1: Univariate Analysis
+
+The univariate analysis provides a foundational understanding of the individual characteristics within our cleaned NHIS 2021 dataset. By examining quantitative and qualitative variables separately, we can describe the central tendencies, spread, and frequency distributions of the participants. 
+
+### Quantitative Variables
+
 ```{r}
 # Summary statistics for quantitative variables AGEP_A, WEIGHTLBTC_A, HEIGHTC_A
 
@@ -109,11 +117,6 @@ sd(nhis_clean$AGEP_A, na.rm = TRUE)
 summary(nhis_clean$AGEP_A)
 ```
 
-# mean = 52.57107, median = 54, sd = 18.33484
-  summary
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  18.00   37.00   54.00   52.57   67.00   85.00 
-
 ```{r}
 # Weight
 cat("\nWEIGHTLBTC_A Summary:\n")
@@ -123,11 +126,6 @@ sd(nhis_clean$WEIGHTLBTC_A, na.rm = TRUE)
 summary(nhis_clean$WEIGHTLBTC_A)
 ```
 
-# mean = 176.8261, median = 173, sd = 39.59538
- summary(nhis_clean$WEIGHTLBTC_A)
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  100.0   147.0   173.0   176.8   200.0   299.0 
-  
 ```{r}
 # Height
 cat("\nHEIGHTTC_A Summary:\n")
@@ -136,11 +134,6 @@ median(nhis_clean$HEIGHTTC_A, na.rm = TRUE)
 sd(nhis_clean$HEIGHTTC_A, na.rm = TRUE)
 summary(nhis_clean$HEIGHTTC_A)
 ```
-
-# mean = 66.70108, median = 66, sd = 3.898793
- summary(nhis_clean$HEIGHTTC_A)
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   59.0    64.0    66.0    66.7    70.0    76.0 
 
 ```{r}
 # Base R Histogram
@@ -165,9 +158,8 @@ hist(nhis_clean$HEIGHTTC_A,
 
 ```
 
-
 ```{r}
-# Ggplot2 historgram
+# Ggplot2 histogram
 
 ggplot(nhis_clean, aes(x = AGEP_A)) +
   geom_histogram(bins = 30, fill = "lightblue") +
@@ -204,7 +196,6 @@ boxplot(nhis_clean$HEIGHTTC_A,
 # Average height of participants are about 66 inches
 ```
 
-
 ```{r}
 # ggplot2 boxplots
 
@@ -223,6 +214,8 @@ ggplot(nhis_clean, aes(y = HEIGHTTC_A)) +
   ggtitle("Height Boxplot")
 # Avergae participants height is 66 inches 
 ```
+
+### Qualitative Variables
 
 ```{r}
 # Frequency tables and graphs for qualitative variables
@@ -313,6 +306,21 @@ ggplot(nhis_clean, aes(x = factor(LSATIS4R_A))) +
        x = "LSATIS4R_A",
        y = "Frequency")
 ```
+
+### Interpretation
+
+The summary statistics and visualizations for the quantitative variables reveal a diverse adult population with expected physiological ranges.
+
+Age(AGEP_A): The average age of the sample is approximately 52.6 years, with a median of 54, suggesting a relatively balanced distribution of middle-aged adults. The histograms show a slight right skew, indicating a wide representation across the lifespan from 18 to 85 years. The boxplots confirm that 50% of the participants fall between the ages of 37 and 67, the IQR.
+
+Weight(WEIGHTLBTC_A): Participants' weights range from 100 to 299 pounds, with a mean weight of 176.8 pounds. Both the histograms and boxplots illustrate that the majority of the population is concentrated between 140 and 200 pounds. The boxplot highlights that while the distribution is centered around the median of 173 lbs, there is a notable spread toward the upper weight limit.
+
+Height(HEIGHTTC_A): The height distribution is approximately normal, centered around a mean of 66.7 inches, or roughly 5'7". The narrow standard deviation at 3.9 inches and the boxplot indicate that most participants are between 64 and 70 inches tall. 
+
+Frequency tables and bar plots were used to assess the distribution of categorical variables. These distributions provide context for the social and health-related tiers of the sample
+
+
+
 
 ```{r}
 # Creating boxplots for AGEP_A and to display levels by SEX_A and EDUCP_A
