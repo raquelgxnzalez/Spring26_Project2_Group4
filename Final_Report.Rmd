@@ -65,8 +65,13 @@ nhis_clean <- nhis_subset %>%
   drop_na()
 ```
 
+### Interpretation
 
-# Task 2: Recoding Variables
+The data cleaning process was essential to transform the raw NHIS dataset into a reliable analytical sample for public health research. The first step involved a targeted variable selection, narrowing the scope of the data to eight key determinants, including age, weight, height, and various sociodemographic factors. The first cleaning step included identifying and converting non-response codes (based on the NHIS codebook) into NA values. This prevents placeholder values for "Refused" or "Don't Know" from being treated as actual measurements, which would have severely biased the physiological averages, such as incorrectly inflating the mean weight of the cohort.
+
+Once the missing values were standardized, listwise deletion was applied to ensure a complete-case analysis. While this reduces the overall sample size, it is a necessary choice in this context to ensure that every participant included in the final analysis has a full set of data across all variables. This provides a consistent baseline for calculating correlations and health trends. 
+
+## Task 2: Recoding Variables
 
 ```{r}
 # Update nhis_clean by recoding EDUC_A variable based on codebook categories
@@ -86,6 +91,12 @@ nhis_clean <- nhis_clean %>%
 # Save the final cleaned dataset as a csv in the data folder
 write_csv(nhis_clean, "data/nhis_clean.csv")
 ```
+
+### Interpretation
+
+To make the data more actionable for public health interpretation, the education variable (EDUCP_A) was recoded from its original eleven categories into four broader educational tiers. This "collapsing" of categories is a standard practice in epidemiological research to increase statistical power and create more stable groupings for comparison. By grouping education levels into categories such as "less than High School" or "College Graduate or better", this variable serves as a more effective proxy for socioeconomic status. This allows for clearer analysis of how educational attainment intersects with behavioral health attributes and socioeconomic status. 
+
+This recoded variable was converted into a factor with meaningful level names. This transition from raw numeric codes to descriptive labels ensures that the resulting visualizations and summary tables are easily interpretable for public health stakeholders. By explicitly ordered the factor levels, the analysis preserves the natural hierarchy of education, ensuring that any identified trends, such as the correlation between higher education and improved life satisfaction, are presented in a logical and professional manner. This refined dataset, saved as nhis_clean.csv, serves as the finalized foundation for all univariate and bivariate reporting.
 
 ```{r}
 # Summary statistics for quantitative variables AGEP_A, WEIGHTLBTC_A, HEIGHTC_A
