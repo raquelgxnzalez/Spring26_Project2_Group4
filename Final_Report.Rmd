@@ -9,30 +9,39 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+```{r}
 # Load libraries
 library(tidyverse)
 library(psych)
+```
 
+```{r}
 # Import dataset using relative path for reproducibility
 nhis_data <- read.csv("data/NHIS _Data_2021.csv")
+```
 
+```{r}
 # Initial exploration
 str(nhis_data)
 summary(nhis_data)
 head(nhis_data)
+```
 
-# Import tidyverse
-library(tidyverse)
-
+```{r}
 # Load original dataset
 nhis_data <- read.csv("data/NHIS _Data_2021.csv")
+```
 
 # Task 1: Variable Selection & Missing Value Check
 
+```{r}
 # Select only the required variables
 nhis_subset <- nhis_data %>%
   select(AGEP_A, WEIGHTLBTC_A, HEIGHTTC_A, SEX_A, HISPALLP_A, EDUCP_A, PHSTAT_A, LSATIS4R_A)
+```
 
+```{r}
 # Removing missing and non-response codes by removing rows where any columns have codes 7, 8, 9, 97, 98, 99, 996, 997, 998, or 999
 # Nest ifelse() with respective codes into mutate()
 # Change codes to NAs, then delete at the end
@@ -53,9 +62,12 @@ nhis_clean <- nhis_subset %>%
                 ~ ifelse(.x %in% c(7, 8, 9), NA, .x))) %>%
   # Remove all rows that now have an NA
   drop_na()
+```
+
 
 # Task 2: Recoding Variables
 
+```{r}
 # Update nhis_clean by recoding EDUC_A variable based on codebook categories
 nhis_clean <- nhis_clean %>%
   # Use case_when() instead of factor() to first group numbers into 4 categories first
@@ -67,10 +79,14 @@ nhis_clean <- nhis_clean %>%
     EDUCP_A >= 8 & EDUCP_A <= 10 ~ "College Graduate or better")) %>%
   # Change category names into a factor with specific labels and a specific order
   mutate(Education = factor(Education, levels = c("less than High School", "High School Graduate", "Some College Education", "College Graduate or better")))
-    
+```
+
+```{r}
 # Save the final cleaned dataset as a csv in the data folder
 write_csv(nhis_clean, "data/nhis_clean.csv")
+```
 
+```{r}
 # Summary statistics for quantitative variables AGEP_A, WEIGHTLBTC_A, HEIGHTC_A
 
 # Age
@@ -79,36 +95,42 @@ mean(nhis_clean$AGEP_A, na.rm = TRUE)
 median(nhis_clean$AGEP_A, na.rm = TRUE)
 sd(nhis_clean$AGEP_A, na.rm = TRUE)
 summary(nhis_clean$AGEP_A)
+```
 
 # mean = 52.57107, median = 54, sd = 18.33484
   summary
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   18.00   37.00   54.00   52.57   67.00   85.00 
 
+```{r}
 # Weight
 cat("\nWEIGHTLBTC_A Summary:\n")
 mean(nhis_clean$WEIGHTLBTC_A, na.rm = TRUE)
 median(nhis_clean$WEIGHTLBTC_A, na.rm = TRUE)
 sd(nhis_clean$WEIGHTLBTC_A, na.rm = TRUE)
 summary(nhis_clean$WEIGHTLBTC_A)
+```
 
 # mean = 176.8261, median = 173, sd = 39.59538
  summary(nhis_clean$WEIGHTLBTC_A)
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   100.0   147.0   173.0   176.8   200.0   299.0 
-
+  
+```{r}
 # Height
 cat("\nHEIGHTTC_A Summary:\n")
 mean(nhis_clean$HEIGHTTC_A, na.rm = TRUE)
 median(nhis_clean$HEIGHTTC_A, na.rm = TRUE)
 sd(nhis_clean$HEIGHTTC_A, na.rm = TRUE)
 summary(nhis_clean$HEIGHTTC_A)
+```
 
 # mean = 66.70108, median = 66, sd = 3.898793
  summary(nhis_clean$HEIGHTTC_A)
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
    59.0    64.0    66.0    66.7    70.0    76.0 
 
+```{r}
 # Base R Histogram
 
 hist(nhis_clean$AGEP_A,
@@ -129,6 +151,10 @@ hist(nhis_clean$HEIGHTTC_A,
      col = "blue")
 # Participants are mostly around 64-69 inches 
 
+```
+
+
+```{r}
 # Ggplot2 historgram
 
 ggplot(nhis_clean, aes(x = AGEP_A)) +
@@ -145,7 +171,9 @@ ggplot(nhis_clean, aes(x = HEIGHTTC_A)) +
   geom_histogram(bins = 30, fill = "lightblue") +
   ggtitle("Height Distribution")
 # Most participants are around 65-70 inches
+```
 
+```{r}
 # Base R Boxplot
 
 boxplot(nhis_clean$AGEP_A,
@@ -162,7 +190,10 @@ boxplot(nhis_clean$HEIGHTTC_A,
         main = "Height Boxplot",
         col = "green")
 # Average height of participants are about 66 inches
+```
 
+
+```{r}
 # ggplot2 boxplots
 
 ggplot(nhis_clean, aes(y = AGEP_A)) +
@@ -179,8 +210,9 @@ ggplot(nhis_clean, aes(y = HEIGHTTC_A)) +
   geom_boxplot(fill = "lightgreen") +
   ggtitle("Height Boxplot")
 # Avergae participants height is 66 inches 
+```
 
-
+```{r}
 # Frequency tables and graphs for qualitative variables
 
 # 1. SEX_A
@@ -198,7 +230,9 @@ ggplot(nhis_clean, aes(x = factor(SEX_A))) +
   labs(title = "Sex Distribution",
        x = "Sex",
        y = "Frequency")
+```
 
+```{r}
 # 2. HISPALLP_A
 
 table(nhis_clean$HISPALLP_A)
@@ -214,8 +248,9 @@ ggplot(nhis_clean, aes(x = factor(HISPALLP_A))) +
   labs(title = "Hispanic Origin Distribution",
        x = "HISPALLP_A",
        y = "Frequency")
+```
 
-
+```{r}
 # 3. EDUCP_A
 
 table(nhis_clean$EDUCP_A)
@@ -231,7 +266,9 @@ ggplot(nhis_clean, aes(x = factor(EDUCP_A))) +
   labs(title = "Education Level Distribution",
        x = "EDUCP_A",
        y = "Frequency")
+```
 
+```{r}
 # 4. PHSTAT_A
 table(nhis_clean$PHSTAT_A)
 
@@ -246,8 +283,9 @@ ggplot(nhis_clean, aes(x = factor(PHSTAT_A))) +
   labs(title = "Physical Health Status Distribution",
        x = "PHSTAT_A",
        y = "Frequency")
+```
 
-
+```{r}
 # 5. LSATIS4R_A
 table(nhis_clean$LSATIS4R_A)
 
@@ -262,7 +300,9 @@ ggplot(nhis_clean, aes(x = factor(LSATIS4R_A))) +
   labs(title = "Life Satisfaction Distribution",
        x = "LSATIS4R_A",
        y = "Frequency")
+```
 
+```{r}
 # Creating boxplots for AGEP_A and to display levels by SEX_A and EDUCP_A
 
 boxplot(AGEP_A ~ factor(SEX_A), data = nhis_clean,
@@ -292,7 +332,9 @@ ggplot(nhis_clean, aes(x=Education, y=AGEP_A))+
        x= "Education Level",
        y= "Age")+
   theme_minimal()
+```
 
+```{r}
 # Creating clustered bar chart for PHSTAT_A (General Health) by LSATIS4R_A (Life Satisfaction)
 
 ggplot(nhis_clean, aes(x=factor(LSATIS4R_A), fill= factor(PHSTAT_A)))+
@@ -321,7 +363,9 @@ ggplot(nhis_clean,
   labs(title = "Scatter plot of Height vs Weight",
        x= "Height",
        y= "Weight")
+```
 
+```{r}
 # Correlation report Height vs Weight
 # This report shows that there is a significant relationship p-value<2.2e-16, because we reject the null hypothesis.
 
@@ -347,3 +391,6 @@ pairs.panels(quant_vars,
              hist.col = "skyblue",
              density = TRUE,
              ellipses = TRUE)
+```
+
+
