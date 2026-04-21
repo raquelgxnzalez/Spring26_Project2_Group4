@@ -112,19 +112,20 @@ ggplot(nhis_clean, aes(x = factor(HISPALLP_A))) +
 
 # 3. EDUCP_A
 
-table(nhis_clean$EDUCP_A)
+table(nhis_clean$Education)
 
-barplot(table(nhis_clean$EDUCP_A),
+barplot(table(nhis_clean$Education),
         main = "Education Level Distribution",
-        xlab = "EDUCP_A",
+        xlab = "Education Level",
         ylab = "Frequency",
         col = "orange")
 
-ggplot(nhis_clean, aes(x = factor(EDUCP_A))) +
+ggplot(nhis_clean, aes(x = Education)) +
   geom_bar(fill = "orange") +
   labs(title = "Education Level Distribution",
-       x = "EDUCP_A",
-       y = "Frequency")
+       x = "Education Level",
+       y = "Frequency") +
+  theme_minimal()
 
 # 4. PHSTAT_A
 table(nhis_clean$PHSTAT_A)
