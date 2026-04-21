@@ -202,7 +202,7 @@ boxplot(nhis_clean$HEIGHTTC_A,
 ggplot(nhis_clean, aes(y = AGEP_A)) +
   geom_boxplot(fill = "lightgreen") +
   ggtitle("Age Boxplot")
-# Avergae age of participants is 54 years old
+# Average age of participants is 54 years old
 
 ggplot(nhis_clean, aes(y = WEIGHTLBTC_A)) +
   geom_boxplot(fill = "lightgreen") +
@@ -212,7 +212,7 @@ ggplot(nhis_clean, aes(y = WEIGHTLBTC_A)) +
 ggplot(nhis_clean, aes(y = HEIGHTTC_A)) +
   geom_boxplot(fill = "lightgreen") +
   ggtitle("Height Boxplot")
-# Avergae participants height is 66 inches 
+# Average participants height is 66 inches 
 ```
 
 ### Interpretation
@@ -244,7 +244,8 @@ ggplot(nhis_clean, aes(x = factor(SEX_A))) +
   geom_bar(fill = "blue") +
   labs(title = "Sex Distribution",
        x = "Sex",
-       y = "Frequency")
+       y = "Frequency") +
+  theme_minimal()
 ```
 
 ```{r}
@@ -254,33 +255,35 @@ table(nhis_clean$HISPALLP_A)
 
 barplot(table(nhis_clean$HISPALLP_A),
         main = "Hispanic Origin Distribution",
-        xlab = "HISPALLP_A",
+        xlab = "Hispanic Origin",
         ylab = "Frequency",
         col = "lightgreen")
 
 ggplot(nhis_clean, aes(x = factor(HISPALLP_A))) +
   geom_bar(fill = "green") +
   labs(title = "Hispanic Origin Distribution",
-       x = "HISPALLP_A",
-       y = "Frequency")
+       x = "Hispanic Origin",
+       y = "Frequency") +
+  theme_minimal()
+
 ```
 
 ```{r}
 # 3. EDUCP_A
+table(nhis_clean$Education)
 
-table(nhis_clean$EDUCP_A)
-
-barplot(table(nhis_clean$EDUCP_A),
+barplot(table(nhis_clean$Education),
         main = "Education Level Distribution",
-        xlab = "EDUCP_A",
+        xlab = "Education Level",
         ylab = "Frequency",
         col = "orange")
 
-ggplot(nhis_clean, aes(x = factor(EDUCP_A))) +
+ggplot(nhis_clean, aes(x = Education)) +
   geom_bar(fill = "orange") +
   labs(title = "Education Level Distribution",
-       x = "EDUCP_A",
-       y = "Frequency")
+       x = "Education Level",
+       y = "Frequency") +
+  theme_minimal()
 ```
 
 ```{r}
@@ -289,15 +292,16 @@ table(nhis_clean$PHSTAT_A)
 
 barplot(table(nhis_clean$PHSTAT_A),
         main = "Physical Health Status Distribution",
-        xlab = "PHSTAT_A",
+        xlab = "Physical Health Status",
         ylab = "Frequency",
         col = "purple")
 
 ggplot(nhis_clean, aes(x = factor(PHSTAT_A))) +
   geom_bar(fill = "purple") +
   labs(title = "Physical Health Status Distribution",
-       x = "PHSTAT_A",
-       y = "Frequency")
+       x = "Physical Health Status",
+       y = "Frequency") +
+  theme_minimal()
 ```
 
 ```{r}
@@ -306,23 +310,33 @@ table(nhis_clean$LSATIS4R_A)
 
 barplot(table(nhis_clean$LSATIS4R_A),
         main = "Life Satisfaction Distribution",
-        xlab = "LSATIS4R_A",
+        xlab = "Life Satisfaction",
         ylab = "Frequency",
         col = "pink")
 
 ggplot(nhis_clean, aes(x = factor(LSATIS4R_A))) +
   geom_bar(fill = "pink") +
   labs(title = "Life Satisfaction Distribution",
-       x = "LSATIS4R_A",
-       y = "Frequency")
+       x = "Life Satisfaction",
+       y = "Frequency") +
+  theme_minimal()
 ```
 
 ### Interpretation 
 
-Frequency tables and bar plots were used to assess the distribution of categorical variables. These distributions provide context for the social and health-related tiers of the sample
+Frequency tables and bar plots were used to assess the distribution of categorical variables. These distributions provide context for the social and health-related tiers of the sample.
 
+Sex(SEX_A): The frequency table and bar plots indicate that Females ("2") make up a slight majority of the sample, providing a relatively even basis for gender-based health comparisons.
 
+Hispanic Origin(HISPALLP_A): The bar chart reveals that a large majority of participants identify as Non-Hispanic White (n = 17,617), followed by Hispanic (n =3,533). This distribution is crucial for identifying potential health disparities across different racial and ethnic groups in the subsequent analysis.
 
+Education Level(Education): Based on the recoded variable, the largest segment of our population consists of "College Graduates or better". This highlights the socioeconomic diversity of the sample and serves as a primary independent variable for analyzing health status.
+
+Physical Health Status(PHSTAT_A): The distribution of general health status is skewed toward the "Very Good" (2) categories, followed by "Good", and then "Excellent." This suggests that a significant portion of the cohort perceives their physical health as positive, though a smaller frequency remains in the "Fair" and "Poor" categories.
+
+Life Satisfaction(LSATIS4R_A): Life satisfaction plots show that most participants reported being "Very Satisfied" (1) and "Satisfied" (2). Understanding the frequency of these subjective well-being scores is essential for exploring the relationship between mental outlook and physical health outcomes.  
+
+The univariate analysis confirms that the cleaned dataset is free from the extreme outliers identified during the inital exploration. The cohort is primarily composed of middle-aged adults with a broad range of educational backgroynds and generally positive self-reported health and life satisfaction. These distributions provide the necessary context to move forward with bivariate analysis to see how these variables interact.
 
 ```{r}
 # Creating boxplots for AGEP_A and to display levels by SEX_A and EDUCP_A
