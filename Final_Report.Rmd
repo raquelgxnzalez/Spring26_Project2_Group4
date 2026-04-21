@@ -338,6 +338,12 @@ Life Satisfaction(LSATIS4R_A): Life satisfaction plots show that most participan
 
 The univariate analysis confirms that the cleaned dataset is free from the extreme outliers identified during the inital exploration. The cohort is primarily composed of middle-aged adults with a broad range of educational backgroynds and generally positive self-reported health and life satisfaction. These distributions provide the necessary context to move forward with bivariate analysis to see how these variables interact.
 
+## Task 2: Bivariate Analysis
+
+The bivariate analysis explores the relationships between pairs of variables to identify patterns, differences, and correlations within the NHIS 2021 cohort. By examining how quantitative measures vary across qualitative categories, and how two quantitative measures interact, we gain deeper insight into the health profile of this sample.
+
+### Quantitative vs Qualitative Boxplots
+
 ```{r}
 # Creating boxplots for AGEP_A and to display levels by SEX_A and EDUCP_A
 
@@ -370,6 +376,8 @@ ggplot(nhis_clean, aes(x=Education, y=AGEP_A))+
   theme_minimal()
 ```
 
+### Quantitative vs Qualitative Clustered Bar Chart
+
 ```{r}
 # Creating clustered bar chart for PHSTAT_A (General Health) by LSATIS4R_A (Life Satisfaction)
 
@@ -379,7 +387,11 @@ ggplot(nhis_clean, aes(x=factor(LSATIS4R_A), fill= factor(PHSTAT_A)))+
        x="Life Satisfaction",
        y="General Health Status")+
     theme_minimal()
+```
 
+### Quantitative vs Qualitative Scatter Plots
+
+```{r}
 # Creating a scatter plot for HEIGHTTC_A and WEIGHTLBTC_A
 
 x <- nhis_clean$HEIGHTTC_A
@@ -399,14 +411,28 @@ ggplot(nhis_clean,
   labs(title = "Scatter plot of Height vs Weight",
        x= "Height",
        y= "Weight")
-```
 
-```{r}
 # Correlation report Height vs Weight
 # This report shows that there is a significant relationship p-value<2.2e-16, because we reject the null hypothesis.
 
 cor.test(nhis_clean$HEIGHTTC_A,nhis_clean$WEIGHTLBTC_A)
+```
 
+### Interpretation
+
+Side-by-side boxplots were utilized to visualize how age is distributed across different demographic groups. The distribution of age appears similar between males and females. The median age for both groups remains near the mid-50's, suggesting that gender does not significantly skew the age profile of this specific cohort. The boxplots also visualize age across the four recoded educational levels: less than High School, High School Graduate, Some College Education, and College Graduate or better. The "less than High School" group appears to have a slightly higher median age, which likely reflects broader historical shifts in education access, where older generations were less likely to obtain high school diplomas or college degrees compared to younger cohorts. 
+
+The clustered bar chart was employed to examine the relationship between a participant's perceived physical health status (PHSTAT_A) and their reported life satisfaction (LSATIS4R_A). The visualization shows a clear positive association between physical health and mental well-being. Participants who reported being "Very Satisfied (1) were predominantly represented in the "Excellent" (1) and "Very Good" (2) health categories, with very few reporting poor health. Lower levels of satisfaction shifts the modal health response towards "Good" (3), "Fair" (4), and "Poor" (5). This suggests that high life satisfaction may act as a protective factor or a marker for overall physical resilience. The dissatisfied individuals highlight a vulnerable population that may face a double burden of both physical ailment and lower psychological well-being.
+
+To assess the relationship between physical measurements, a scatter plot and a Pearson correlation test were conducted for height (HEIGHTTC_A) and weight (WEIGHTLBTC_A). The scatter plot demonstrates a clear positive linear trend, indicating that as height increases, weight generally tends to increase as well. The vertical strips in the plot reflect that height was recorded in whole-inch increments, ranging from 59 to 76 inches. The correlation analysis yielded a p-value of < 2.2 * 10^-16, which is far below the standard significance threshold of 0.05. This highly significant result allows us to reject the null hypothesis and confirm a genuine relationship between these variables in the NHIS population. The calculated Pearson's r is 0.502, indicating a moderate-to-strong positive correlation. This means that approximately 25% (r^2 = 0.25) of the variation in weight can be explained by height alone.
+
+The bivariate results highlight critical associations. While age remains stable across sex, it varies by educational attainment due to generational trends. Most notable, the data confirms a strong link between physical health and life satisfaction, alongside a highly significant correlation (r = 0.502) between height and weight. These findings provide the groundwork for multivariate analysis, where we will see if these patterns hold when considering multiple factors simultaneously.
+
+# Day 4: Multivariate Analysis
+
+## Enhanced Scatterplot
+
+```{r}
 # Use ggplot2 to enhance the Day 3 Scatterplot
 ggplot(nhis_clean, aes(x = HEIGHTTC_A, y = WEIGHTLBTC_A, color = factor(SEX_A))) +
   geom_point(alpha = 0.5) +
@@ -416,6 +442,11 @@ ggplot(nhis_clean, aes(x = HEIGHTTC_A, y = WEIGHTLBTC_A, color = factor(SEX_A)))
        y = "Weight (pounds)",
        color = "Sex (1=M, 2=F") +
   theme_minimal()
+```
+
+### Correlation Scatter Plot Matrix
+
+```{r}
 
 # Use pairs.panels() to create a correlation matrix
 # Select only the quantitative variables for the matrix
@@ -429,4 +460,4 @@ pairs.panels(quant_vars,
              ellipses = TRUE)
 ```
 
-
+### Interpretation
