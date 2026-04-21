@@ -95,7 +95,7 @@ ggplot(nhis_clean, aes(x = factor(SEX_A))) +
 
 # 2. HISPALLP_A
 
-table(nhis_data$HISPALLP_A)
+table(nhis_clean$HISPALLP_A)
 
 barplot(table(nhis_clean$HISPALLP_A),
         main = "Hispanic Origin Distribution",
