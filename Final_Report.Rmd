@@ -2,7 +2,9 @@
 title: "Final_Report"
 author: "Arely Salinas Cambron, Ruby Cruz, Kylize Dela Cruz, and Raquel Gonzalez"
 date: "2026-04-20"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
